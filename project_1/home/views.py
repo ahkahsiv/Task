@@ -14,17 +14,18 @@ from reportlab.lib.pagesizes import letter
 
 
 def form(request):
-	return render(request,'form.html')
+	data= vish.objects.all()
+	return render(request,'index.html',{'data':data})
 
-def add_vish(request):
+def add(request):
 	name=request.POST['name']
 	email=request.POST['email']
 	phone=request.POST['phone']
 	vish.objects.create(name=name, email=email, phone=phone)
-	return render(request,'form.html')
-		
+	data= vish.objects.all()
+	return render(request,'index.html',{'data':data})		
 	
-def write(request):
+def write_csv(request):
 	
 	response = HttpResponse(content_type='text/csv')
 	response['Content-Disposition'] = 'attachment; filename=vish_data.csv'
@@ -46,7 +47,7 @@ def write(request):
 	return response
 
 
-def vish_text(request):
+def write_text(request):
 	response = HttpResponse(content_type='text/plain')
 	response['Content-Disposition'] = 'attachment; filename=vishss.txt'
 	# Designate The Model
@@ -70,7 +71,7 @@ def vish_text(request):
 
 
 # Generate a PDF File vishs List
-def vishs_pdf(request):
+def write_pdf(request):
 	# Create Bytestream buffer
 	buf = io.BytesIO()
 	# Create a canvas
@@ -112,3 +113,7 @@ def vishs_pdf(request):
 	# Return something
 	return FileResponse(buf, as_attachment=True, filename='vishs.pdf')
 # Create your views here.
+
+
+def new(request):
+	return render(request, 'index.html') 
