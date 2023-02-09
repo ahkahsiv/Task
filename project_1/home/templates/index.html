@@ -11,6 +11,7 @@
         body{
             background-color: #32383e;
         }
+       
     </style>
     <title>Index</title>
   </head>
@@ -23,18 +24,18 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item active">
-              <a class="nav-link" href="/pdf/">PDF<span class="sr-only">(current)</span></a>
+              <button class="btn btn-dark white"><a class="nav-link" href="/pdf/">PDF<span class="sr-only">(current)</span></a></button>
             </li>
             <li class="nav-item active">
-              <a class="nav-link" href="/csv/">CSV</a>
+              <button class="btn btn-dark white"><a class="nav-link" href="/csv/">CSV</a></button>
             </li>
             <li class="nav-item active">
-              <a class="nav-link" href="/text/">Text</a>
+               <button type="button" class="btn btn-dark text-white"><a class="nav-link" href="/text/">Text</a></button>
             </li>
             <li>
             <form class="form-inline">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <button class="btn btn-dark white my-2 my-sm-0" type="submit">Search</button>
               </form>
             </li>
             <li>
@@ -53,6 +54,9 @@
                 <th scope="col">Name</th>
                 <th scope="col">Email</th>
                 <th scope="col">Phone</th>
+                <th scope="col">Delete</th>
+                <th scope="col">Update</th>
+
               </tr>
             </thead>
             <tbody>
@@ -62,6 +66,8 @@
                 <td>{{i.name}}</td>
                 <td>{{i.email}}</td>
                 <td>{{i.phone}}</td>
+                <td><button  class="btn btn-dark white"><a href="del?id={{i.id}}">Delete</a></td></button>
+                <td><button  class="btn btn-dark white"><a href="update_page?id={{i.id}}"> Update</a></button></td>
               </tr>
               {% endfor %}
             </tbody>
@@ -106,6 +112,12 @@
       </div>
     </div>
   </div>
+
+
+
+
+  <!-- script for bringing id in update modal -->
+ 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

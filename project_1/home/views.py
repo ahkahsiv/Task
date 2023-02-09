@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 from django.http import HttpResponse
 from .models import vish
 import csv
@@ -10,6 +10,7 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.units import inch
 from reportlab.lib.pagesizes import letter
 
+# to get id with help of js
 
 
 
@@ -23,8 +24,31 @@ def add(request):
 	phone=request.POST['phone']
 	vish.objects.create(name=name, email=email, phone=phone)
 	data= vish.objects.all()
-	return render(request,'index.html',{'data':data})		
+	return render(request,'index.html',{'data':data})	
+
+def del_(request):
+	id=request.GET['id']
+	vish.objects.get(id=id).delete()
+	data= vish.objects.all()
+	return render(request,'index.html',{'data':data})
+
+def upd(request):
+	id=request.GET['id']
+	data=vish.objects.get(id=id)
+	return render(request,'upd.html',{'data':data})	
+
+def upd_details(request):
+	v_update=vish()
+	v_update.id=request.POST['id']
+	v_update.name=request.POST['name']
+	v_update.email=request.POST['email']
+	v_update.phone=request.POST['phone']
+	v_update.save()
+	data= vish.objects.all()
+	return render(request,'index.html',{'data':data})
+
 	
+
 def write_csv(request):
 	
 	response = HttpResponse(content_type='text/csv')
@@ -112,8 +136,5 @@ def write_pdf(request):
 
 	# Return something
 	return FileResponse(buf, as_attachment=True, filename='vishs.pdf')
-# Create your views here.
 
 
-def new(request):
-	return render(request, 'index.html') 

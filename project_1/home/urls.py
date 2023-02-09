@@ -7,7 +7,8 @@ urlpatterns = [
     path('csv/',views.write_csv),
     path('text/',views.write_text),
     path('pdf/',views.write_pdf),
-    path('new/',views.new),
-
+    path('update_page/',views.upd),
+    path('del/',views.del_),
+    path('upd_details/',views.upd_details),
 
 ]
