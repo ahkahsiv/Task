@@ -10,5 +10,6 @@ urlpatterns = [
     path('update_page/',views.upd),
     path('del/',views.del_),
     path('upd_details/',views.upd_details),
+    path('search/',views.search),
 
 ]

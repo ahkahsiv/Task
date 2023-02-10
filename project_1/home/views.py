@@ -10,6 +10,9 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.units import inch
 from reportlab.lib.pagesizes import letter
 
+# for searching
+from django.db.models import Q
+
 # to get id with help of js
 
 
@@ -17,6 +20,8 @@ from reportlab.lib.pagesizes import letter
 def form(request):
 	data= vish.objects.all()
 	return render(request,'index.html',{'data':data})
+
+
 
 def add(request):
 	name=request.POST['name']
@@ -26,16 +31,25 @@ def add(request):
 	data= vish.objects.all()
 	return render(request,'index.html',{'data':data})	
 
+
+
+
 def del_(request):
 	id=request.GET['id']
 	vish.objects.get(id=id).delete()
 	data= vish.objects.all()
 	return render(request,'index.html',{'data':data})
 
+
+
+
 def upd(request):
 	id=request.GET['id']
 	data=vish.objects.get(id=id)
 	return render(request,'upd.html',{'data':data})	
+
+
+
 
 def upd_details(request):
 	v_update=vish()
@@ -46,6 +60,12 @@ def upd_details(request):
 	v_update.save()
 	data= vish.objects.all()
 	return render(request,'index.html',{'data':data})
+
+
+def search(request):
+	search=request.POST['search']
+	data= vish.objects.filter(Q(name=search) | Q(email=search) | Q(phone=search))
+	return render(request,'index.html',{'data':data}) 
 
 	
 
